@@ -10,7 +10,7 @@ gen/
 
 # Gradle files
 .gradle/
-build/
+/build/
 
 # Local configuration file (sdk path, etc)
 local.properties
@@ -30,3 +30,14 @@ captures/
 # Idea Files
 /.idea/workspace.xml
 /.idea/libraries
+
+# Build Files
+/app/build/tmp
+/app/build/intermediates
+/app/build/generated
+/app/build/outputs/logs
+/app/build/outputs/lint-results-release-fatal_files
+/app/build/outputs/lint-results-release-fatal.html
+/app/build/outputs/lint-results-release-fatal.xml
+/app/build/outputs/apk/app-debug-unaligned.apk
+/app/build/outputs/apk/app-debug.apk
