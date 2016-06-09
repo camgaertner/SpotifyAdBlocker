@@ -30,8 +30,9 @@
             android:id="@+id/checkBox"
             android:textSize="16dp"
             android:onClick="blockAds"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
+            android:layout_below="@+id/button"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp" />
 
         <TextView
             android:layout_width="wrap_content"
