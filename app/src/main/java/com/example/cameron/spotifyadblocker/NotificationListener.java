@@ -23,10 +23,10 @@ import java.util.TimerTask;
  * Created by Cameron on 6/7/2016.
  */
 public class NotificationListener extends NotificationListenerService {
-    boolean muted;
-    int volume;
-    static Timer timer;
-    HashSet<String> blocklist;
+    private boolean muted;
+    private int volume;
+    private static Timer timer;
+    private HashSet<String> blocklist;
 
     public IBinder onBind(Intent intent) {
         return super.onBind(intent);
