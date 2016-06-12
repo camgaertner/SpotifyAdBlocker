@@ -5,6 +5,8 @@ A. JAFFE
 ABC Entertainment
 Adidas
 Adidas Boost
+Airbnb
+Applebee's
 Attraction Formula
 AT&T
 Audi
@@ -13,6 +15,7 @@ AutoTrader.com
 AutoZone
 Bausch+Lomb Ultra
 Boost Mobile
+Burger King
 CIA Student Opportunities
 CIA’s National Clandestine Service
 Carbonite
@@ -20,6 +23,7 @@ Century Media
 Comcast
 Converse
 DHL
+Discover Cards
 DROID RAZR MAXX
 Dark Roast
 Dollar Menu
@@ -34,6 +38,7 @@ Firefly Festival
 Fruit of the Loom
 Global Citizen Festival
 Grammarly
+Grilled Dogs
 H&R Block
 HTC One
 Harman Kardon
@@ -55,6 +60,7 @@ Molloy College
 Mondelez
 My Type
 NAPA Auto Parts
+NAPA
 NBA
 Nike
 NYU
@@ -74,6 +80,7 @@ Sony Pictures
 Sony Vaio
 Spotify
 Spotify In-House EU (InHouse)
+Spotify Premium
 Squarespace
 State Farm
 Target
