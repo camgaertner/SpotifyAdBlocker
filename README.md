@@ -12,4 +12,4 @@ SpotifyAdBlocker is a small Android application that automatically mutes when Sp
 3. Enjoy your music without ads. You can lock your phone as long as the Spotify notification icon was visible.
 
 ## Screenshots
-![Screenshots](/Screenshots/HomeScreen_Device.pngg)
+![Screenshots](/Screenshots/HomeScreen_Device.png)
