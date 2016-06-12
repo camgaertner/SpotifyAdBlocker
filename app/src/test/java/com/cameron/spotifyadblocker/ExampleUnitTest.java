@@ -1,4 +1,4 @@
-package com.example.cameron.spotifyadblocker;
+package com.cameron.spotifyadblocker;
 
 import org.junit.Test;
 

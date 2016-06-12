@@ -1,4 +1,4 @@
-package com.example.cameron.spotifyadblocker;
+package com.cameron.spotifyadblocker;
 
 import android.app.Notification;
 import android.content.Context;
