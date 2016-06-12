@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 
-    tools:context="com.example.cameron.spotifyadblocker.MainActivity"
+    tools:context="com.cameron.spotifyadblocker.MainActivity"
     android:background="#e0e0e0">
 
     <android.support.v7.widget.Toolbar
