@@ -2,7 +2,7 @@
 SpotifyAdBlocker is a small Android application that automatically mutes when Spotify is playing an advertisement.
 
 # Installation Instructions
-1. Download the [SpotifyAdBlocker apk](https://raw.githubusercontent.com/camgaertner/SpotifyAdBlocker/master/app/build/outputs/apk/SpotifyAdBlocker.apk). 
+1. Download the [SpotifyAdBlocker apk](https://github.com/camgaertner/SpotifyAdBlocker/raw/master/app/SpotifyAdBlocker.apk). 
 2. Install the SpotifyAdBlocker apk.
 3. Open your Android settings, then "Security", and enable SpotifyAdBlocker.
 
