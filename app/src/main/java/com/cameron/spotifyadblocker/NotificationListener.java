@@ -55,6 +55,7 @@ public class NotificationListener extends NotificationListenerService {
                 Notification notification = new Notification();
                 boolean foundNotification = false;
                 if (notifications != null) {
+                    Log.d("DEBUG", "Checking notifications.");
                     // Find which notification is Spotify
                     for (int i = 0; i < notifications.length; ++i) {
                         String name = notifications[i].getPackageName();
