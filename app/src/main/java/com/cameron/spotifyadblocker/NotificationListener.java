@@ -24,10 +24,10 @@ import java.util.TimerTask;
  */
 public class NotificationListener extends NotificationListenerService {
     private boolean muted;
+    private int zeroVolume;
     private int volume;
     private static Timer timer;
     private HashSet<String> blocklist;
-
     public IBinder onBind(Intent intent) {
         return super.onBind(intent);
     }
@@ -37,6 +37,7 @@ public class NotificationListener extends NotificationListenerService {
         blocklist = new HashSet<String>();
         muted = false;
         volume = 0;
+        zeroVolume = 0;
         // Load blocklist
         Resources resources = getResources();
         InputStream inputStream = resources.openRawResource(R.raw.blocklist);
@@ -76,12 +77,11 @@ public class NotificationListener extends NotificationListenerService {
                             AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             if (isAdPlaying && !muted) {
                                 volume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
-                                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 0, AudioManager.FLAG_SHOW_UI);
-                                muted = true;
+                                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, zeroVolume, AudioManager.FLAG_SHOW_UI);
                             } else if (!isAdPlaying && muted) {
                                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_SHOW_UI);
-                                muted = false;
                             }
+                            muted = (audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) == zeroVolume);
                         }
                     }
                 }
