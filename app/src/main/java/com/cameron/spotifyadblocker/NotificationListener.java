@@ -24,10 +24,11 @@ import java.util.TimerTask;
  */
 public class NotificationListener extends NotificationListenerService {
     private boolean muted;
+    private int originalVolume;
     private int zeroVolume;
-    private int volume;
     private static Timer timer;
     private HashSet<String> blocklist;
+
     public IBinder onBind(Intent intent) {
         return super.onBind(intent);
     }
@@ -36,8 +37,9 @@ public class NotificationListener extends NotificationListenerService {
         timer = new Timer();
         blocklist = new HashSet<String>();
         muted = false;
-        volume = 0;
+        originalVolume = 0;
         zeroVolume = 0;
+
         // Load blocklist
         Resources resources = getResources();
         InputStream inputStream = resources.openRawResource(R.raw.blocklist);
@@ -57,6 +59,7 @@ public class NotificationListener extends NotificationListenerService {
                 boolean foundNotification = false;
                 if (notifications != null) {
                     Log.d("DEBUG", "Checking notifications.");
+
                     // Find which notification is Spotify
                     for (int i = 0; i < notifications.length; ++i) {
                         String name = notifications[i].getPackageName();
@@ -70,16 +73,17 @@ public class NotificationListener extends NotificationListenerService {
                     // Check if it is an ad
                     if (foundNotification) {
                         Bundle extras = notification.extras;
-                        String title = extras.getString(Notification.EXTRA_TITLE);
+                        String title = extras.getCharSequence(Notification.EXTRA_TITLE).toString();
                         if (title != null) {
                             Log.d("DEBUG", title);
                             boolean isAdPlaying = blocklist.contains(title);
                             AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             if (isAdPlaying && !muted) {
-                                volume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
+                                originalVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
                                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, zeroVolume, AudioManager.FLAG_SHOW_UI);
-                            } else if (!isAdPlaying && muted) {
-                                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, volume, AudioManager.FLAG_SHOW_UI);
+                            }
+                            else if (!isAdPlaying && muted) {
+                                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, originalVolume, AudioManager.FLAG_SHOW_UI);
                             }
                             muted = (audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) == zeroVolume);
                         }
