@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="24dp"
-        android:layout_marginRight="24dp">
+        android:layout_marginRight="24dp"
+        android:id="@+id/relativeLayout2">
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -57,5 +58,36 @@
             android:onClick="notificationAccess" />
 
     </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="222dp"
+        android:layout_alignEnd="@+id/relativeLayout2"
+        android:layout_alignStart="@+id/relativeLayout2">
+
+    </RelativeLayout>
+
+    <Button
+        android:id="@+id/buttonAddFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/relativeLayout2"
+        android:layout_alignTop="@+id/relativeLayout"
+        android:onClick="addAdditionalFilter"
+        android:text="Add" />
+
+    <EditText
+        android:id="@+id/editTextAddFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/buttonAddFilter"
+        android:layout_alignBottom="@+id/buttonAddFilter"
+        android:layout_alignStart="@+id/relativeLayout2"
+        android:ems="10"
+        android:hint="Enter text to add filter"
+        android:inputType="textPersonName" />
 
 </RelativeLayout>
