@@ -90,4 +90,14 @@
         android:hint="Enter text to add filter"
         android:inputType="textPersonName" />
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/relativeLayout2"
+        android:layout_alignStart="@+id/relativeLayout2"
+        android:layout_below="@+id/buttonAddFilter"
+        android:text="If you hear an ad, you can add the title to the filter list. Toggle blocking to apply changes."
+        android:textAlignment="center" />
+
 </RelativeLayout>

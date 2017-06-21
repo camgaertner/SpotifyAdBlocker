@@ -44,7 +44,9 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor preferencesEditor = getSharedPreferences("additionalFilters", MODE_PRIVATE).edit();
         EditText et = (EditText)view.getRootView().findViewById(R.id.editTextAddFilter);
         String newFilter = et.getText().toString();
+        et.setText("");
         preferencesEditor.putString("filter_" + newFilter, newFilter);
         preferencesEditor.apply();
+        Toast.makeText(this, "Added filter: " + newFilter, Toast.LENGTH_SHORT).show();
     }
 }
