@@ -3,6 +3,7 @@ package com.cameron.spotifyadblocker;
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.media.AudioManager;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -49,6 +51,8 @@ public class NotificationListener extends NotificationListenerService {
             while ((line = bufferedReader.readLine()) != null) {
                 blocklist.add(line);
             }
+            SharedPreferences preferences = getSharedPreferences("additionalFilters", MODE_PRIVATE);
+            blocklist.addAll((Collection<? extends String>) preferences.getAll().values());
         } catch (IOException e) {
             e.printStackTrace();
         }
