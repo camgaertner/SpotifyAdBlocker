@@ -14,6 +14,7 @@ Audible
 AutoTrader
 AutoTrader.com
 AutoZone
+AXE
 Bausch+Lomb Ultra
 Ben Bridge
 Boost Mobile
@@ -63,6 +64,7 @@ Mazda
 McDonald's
 McDonald's Local
 MeUndies
+Microsoft
 Mobil Super
 Molloy College
 Mondelez

@@ -77,15 +77,18 @@ public class NotificationListener extends NotificationListenerService {
                         if (title != null) {
                             Log.d("DEBUG", title);
                             boolean isAdPlaying = blocklist.contains(title);
+                            String s = isAdPlaying? "Ad playing" : "Ad not playing";
+                            Log.d("DEBUG", s);
                             AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
                             if (isAdPlaying && !muted) {
                                 originalVolume = audioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
                                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, zeroVolume, AudioManager.FLAG_SHOW_UI);
+                                muted = true;
                             }
                             else if (!isAdPlaying && muted) {
                                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, originalVolume, AudioManager.FLAG_SHOW_UI);
+                                muted = false;
                             }
-                            muted = (audioManager.getStreamVolume(AudioManager.STREAM_MUSIC) == zeroVolume);
                         }
                     }
                 }
