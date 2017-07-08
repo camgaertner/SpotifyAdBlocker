@@ -105,8 +105,12 @@ public class NotificationListener extends NotificationListenerService {
     @Override
     public void onDestroy() {
         Log.d("DEBUG", "Destroying Service");
-        killService();
-        Log.d("DEBUG", "Timer canceled.");
+        try {
+            killService();
+            Log.d("DEBUG", "Timer canceled.");
+        } catch (NullPointerException ex) {
+            Log.w("WARN", "NullPointer encountered while cancelling timer.");
+        }
     }
 
     @Override
