@@ -1,5 +1,6 @@
 package com.cameron.spotifyadblocker;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,8 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
+import java.util.Collection;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ViewAdditionalFiltersDialogFragment.ViewAdditionalFiltersDialogListener {
     private boolean enabled;
     private Intent serviceIntent;
 
@@ -48,5 +50,24 @@ public class MainActivity extends AppCompatActivity {
         preferencesEditor.putString("filter_" + newFilter, newFilter);
         preferencesEditor.apply();
         Toast.makeText(this, "Added filter: " + newFilter, Toast.LENGTH_SHORT).show();
+    }
+
+    public void openAdditionalFilterListDialog(View view) {
+        SharedPreferences preferences = getSharedPreferences("additionalFilters", MODE_PRIVATE);
+        Collection<? extends String> additionalFilters = (Collection<String>) preferences.getAll().values();
+        ViewAdditionalFiltersDialogFragment viewAdditionalFiltersDialogFragment = ViewAdditionalFiltersDialogFragment.newInstance(additionalFilters.toArray(new String[additionalFilters.size()]));
+        viewAdditionalFiltersDialogFragment.show(getFragmentManager(), "additionalFiltersDialog");
+    }
+
+    @Override
+    public void onFilterClick(DialogInterface dialogInterface, int i) {
+        SharedPreferences.Editor preferencesEditor = getSharedPreferences("additionalFilters", MODE_PRIVATE).edit();
+
+        SharedPreferences preferences = getSharedPreferences("additionalFilters", MODE_PRIVATE);
+        Collection<String> additionalFilters = (Collection<String>) preferences.getAll().values();
+        String filterToRemove = additionalFilters.toArray(new String[additionalFilters.size()])[i];
+        preferencesEditor.remove("filter_" + filterToRemove);
+        Toast.makeText(this, "Deleted filter: " + filterToRemove, Toast.LENGTH_SHORT).show();
+        preferencesEditor.apply();
     }
 }

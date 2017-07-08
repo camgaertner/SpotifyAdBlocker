@@ -100,4 +100,14 @@
         android:text="If you hear an ad, you can add the title to the filter list. Toggle blocking to apply changes."
         android:textAlignment="center" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:onClick="openAdditionalFilterListDialog"
+        android:text="View Your Filters" />
+
 </RelativeLayout>
