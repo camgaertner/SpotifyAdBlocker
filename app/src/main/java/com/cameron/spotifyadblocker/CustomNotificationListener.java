@@ -24,19 +24,23 @@ import java.util.TimerTask;
 /**
  * Created by Cameron on 6/7/2016.
  */
-public class NotificationListener extends NotificationListenerService {
+// Note: Rename this class during debugging (Refactor->Rename for ease). Android caching may prevent the service from binding on a previously-tested device.
+public class CustomNotificationListener extends NotificationListenerService {
     private boolean muted;
     private int originalVolume;
     private int zeroVolume;
     private static Timer timer;
+    private static boolean running;
     private HashSet<String> blocklist;
 
+    @Override
     public IBinder onBind(Intent intent) {
         return super.onBind(intent);
     }
 
     public int onStartCommand(Intent intent, int flags, int startID) {
         timer = new Timer();
+        running = true;
         blocklist = new HashSet<String>();
         muted = false;
         originalVolume = 0;
@@ -51,7 +55,7 @@ public class NotificationListener extends NotificationListenerService {
             while ((line = bufferedReader.readLine()) != null) {
                 blocklist.add(line);
             }
-            SharedPreferences preferences = getSharedPreferences("additionalFilters", MODE_PRIVATE);
+            SharedPreferences preferences = getSharedPreferences(getString(R.string.saved_filters), MODE_PRIVATE);
             blocklist.addAll((Collection<? extends String>) preferences.getAll().values());
         } catch (IOException e) {
             e.printStackTrace();
@@ -103,6 +107,11 @@ public class NotificationListener extends NotificationListenerService {
 
     public static void killService() {
         timer.cancel();
+        running = false;
+    }
+
+    public static boolean isRunning() {
+        return running;
     }
 
     @Override
@@ -117,12 +126,8 @@ public class NotificationListener extends NotificationListenerService {
     }
 
     @Override
-    public void onNotificationPosted(StatusBarNotification notification) {
-
-    }
+    public void onNotificationPosted(StatusBarNotification notification) { }
 
     @Override
-    public void onNotificationRemoved(StatusBarNotification notification) {
-
-    }
+    public void onNotificationRemoved(StatusBarNotification notification) { }
 }

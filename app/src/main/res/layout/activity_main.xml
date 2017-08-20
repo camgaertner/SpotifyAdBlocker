@@ -30,7 +30,7 @@
             android:text="Enable Blocking"
             android:id="@+id/checkBox"
             android:textSize="16dp"
-            android:onClick="blockAds"
+            android:onClick="onCheckboxClick"
             android:layout_below="@+id/button"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="20dp" />

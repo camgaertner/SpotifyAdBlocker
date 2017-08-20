@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Spotify Ad Blocker</string>
     <string name="title_activity_main2">Main2Activity</string>
-    <string name="service_name">Spotify Ad Blocker</string>
+    <string name="saved_enabled">enabled</string>
+    <string name="saved_filters">additionalFilters</string>
 </resources>

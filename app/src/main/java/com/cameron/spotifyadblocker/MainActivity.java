@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 import java.util.Collection;
@@ -22,20 +23,40 @@ public class MainActivity extends AppCompatActivity implements ViewAdditionalFil
         setContentView(R.layout.activity_main);
         Toolbar myToolbar = (Toolbar) findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
-        enabled = false;
-        serviceIntent = new Intent(this, NotificationListener.class);
+        serviceIntent = new Intent(this, CustomNotificationListener.class);
     }
 
-    public void blockAds(View view) {
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+        restoreCheckboxState();
+    }
+
+    private void restoreCheckboxState()
+    {
+        enabled = false;
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.saved_enabled), MODE_PRIVATE);
+        enabled = preferences.getBoolean(getString(R.string.saved_enabled), enabled);
+        CheckBox enabledCheckbox = (CheckBox) findViewById(R.id.checkBox);
+        enabledCheckbox.setChecked(enabled);
+        if(enabled && !CustomNotificationListener.isRunning())
+            startService(serviceIntent);
+    }
+
+    public void onCheckboxClick(View view) {
         if (enabled) {
             Log.d("DEBUG", "Stopping Service");
-            NotificationListener.killService();
+            CustomNotificationListener.killService();
             stopService(serviceIntent);
             enabled = false;
-        } else {
+        } else if (!CustomNotificationListener.isRunning()){
             startService(serviceIntent);
             enabled = true;
         }
+        SharedPreferences.Editor preferencesEditor = getSharedPreferences(getString(R.string.saved_enabled), MODE_PRIVATE).edit();
+        preferencesEditor.putBoolean(getString(R.string.saved_enabled), enabled);
+        preferencesEditor.apply();
     }
 
     public void notificationAccess(View view) {
@@ -43,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements ViewAdditionalFil
     }
 
     public void addAdditionalFilter(View view) {
-        SharedPreferences.Editor preferencesEditor = getSharedPreferences("additionalFilters", MODE_PRIVATE).edit();
+        SharedPreferences.Editor preferencesEditor = getSharedPreferences(getString(R.string.saved_filters), MODE_PRIVATE).edit();
         EditText et = (EditText)view.getRootView().findViewById(R.id.editTextAddFilter);
         String newFilter = et.getText().toString();
         et.setText("");
@@ -53,7 +74,7 @@ public class MainActivity extends AppCompatActivity implements ViewAdditionalFil
     }
 
     public void openAdditionalFilterListDialog(View view) {
-        SharedPreferences preferences = getSharedPreferences("additionalFilters", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.saved_filters), MODE_PRIVATE);
         Collection<? extends String> additionalFilters = (Collection<String>) preferences.getAll().values();
         ViewAdditionalFiltersDialogFragment viewAdditionalFiltersDialogFragment = ViewAdditionalFiltersDialogFragment.newInstance(additionalFilters.toArray(new String[additionalFilters.size()]));
         viewAdditionalFiltersDialogFragment.show(getFragmentManager(), "additionalFiltersDialog");
@@ -61,9 +82,8 @@ public class MainActivity extends AppCompatActivity implements ViewAdditionalFil
 
     @Override
     public void onFilterClick(DialogInterface dialogInterface, int i) {
-        SharedPreferences.Editor preferencesEditor = getSharedPreferences("additionalFilters", MODE_PRIVATE).edit();
-
-        SharedPreferences preferences = getSharedPreferences("additionalFilters", MODE_PRIVATE);
+        SharedPreferences.Editor preferencesEditor = getSharedPreferences(getString(R.string.saved_filters), MODE_PRIVATE).edit();
+        SharedPreferences preferences = getSharedPreferences(getString(R.string.saved_filters), MODE_PRIVATE);
         Collection<String> additionalFilters = (Collection<String>) preferences.getAll().values();
         String filterToRemove = additionalFilters.toArray(new String[additionalFilters.size()])[i];
         preferencesEditor.remove("filter_" + filterToRemove);
