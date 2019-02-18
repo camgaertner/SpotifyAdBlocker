@@ -15,5 +15,8 @@ SpotifyAdBlocker is a small Android application that automatically mutes when Sp
 ![Screenshots](/Screenshots/Home_Screen.png)
 ![Screenshots](/Screenshots/Filters.png)
 
+## License
+MIT, see LICENSE
+
 ## Contributing
 If you would like to contribute a feature or fix a bug you found in the app, you can open a pull request on Github. Something I would like done is change the app into a more generic auto-muter that can instead be configured to block Spotify ads, so that the app might be placed on the Google Play Store.
